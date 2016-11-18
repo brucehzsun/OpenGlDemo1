@@ -18,6 +18,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        glSurfaceView.release();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         glSurfaceView.onResume();

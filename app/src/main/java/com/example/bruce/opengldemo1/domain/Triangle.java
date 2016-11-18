@@ -57,7 +57,7 @@ public class Triangle {
                 "attribute vec4 aColor;" +
                 "varying vec4 vColor;" +
                 "void main(){" +
-                "   gl_position = uMVPMatrix * vec4(aPosition,1);" +
+                "   gl_Position = uMVPMatrix * vec4(aPosition,1);" +
                 "   vColor = aColor;" +
                 "}";
         String fragmentSource = "precision mediump float;" +

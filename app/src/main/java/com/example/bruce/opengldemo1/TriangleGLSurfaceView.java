@@ -27,6 +27,10 @@ public class TriangleGLSurfaceView extends GLSurfaceView {
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
+    public void release(){
+        mRender.release();
+    }
+
 
     private class SceneRender implements GLSurfaceView.Renderer {
 
@@ -54,6 +58,10 @@ public class TriangleGLSurfaceView extends GLSurfaceView {
         public void onDrawFrame(GL10 gl) {
             GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
             triangle.drawSelf();
+        }
+
+        public void release() {
+            rotateThread.flag = false;
         }
 
         public class RotateThread extends Thread {
