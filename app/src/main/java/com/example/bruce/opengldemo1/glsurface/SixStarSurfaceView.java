@@ -1,4 +1,4 @@
-package com.example.bruce.opengldemo1;
+package com.example.bruce.opengldemo1.glsurface;
 
 import android.content.Context;
 import android.opengl.GLES20;

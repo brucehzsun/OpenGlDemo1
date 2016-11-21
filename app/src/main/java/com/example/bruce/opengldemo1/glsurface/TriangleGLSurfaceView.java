@@ -1,10 +1,9 @@
-package com.example.bruce.opengldemo1;
+package com.example.bruce.opengldemo1.glsurface;
 
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
-import android.util.AttributeSet;
 import android.util.Log;
 
 import com.example.bruce.opengldemo1.domain.Triangle;

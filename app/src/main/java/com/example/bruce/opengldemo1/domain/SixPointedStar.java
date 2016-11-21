@@ -3,7 +3,6 @@ package com.example.bruce.opengldemo1.domain;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
-import com.example.bruce.opengldemo1.SixStarSurfaceView;
 import com.example.bruce.opengldemo1.util.MatrixState;
 import com.example.bruce.opengldemo1.util.ShaderUtil;
 

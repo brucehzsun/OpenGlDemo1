@@ -3,7 +3,7 @@ package com.example.bruce.opengldemo1.domain;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
-import com.example.bruce.opengldemo1.TriangleGLSurfaceView;
+import com.example.bruce.opengldemo1.glsurface.TriangleGLSurfaceView;
 import com.example.bruce.opengldemo1.util.ShaderUtil;
 
 import java.nio.ByteBuffer;

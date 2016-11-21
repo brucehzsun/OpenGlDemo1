@@ -4,6 +4,8 @@ import android.opengl.GLSurfaceView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.bruce.opengldemo1.glsurface.SixStarSurfaceView;
+
 public class MainActivity extends AppCompatActivity {
 
     private GLSurfaceView glSurfaceView;
