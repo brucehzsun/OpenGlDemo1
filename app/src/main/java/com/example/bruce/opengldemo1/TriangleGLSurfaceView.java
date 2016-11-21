@@ -5,6 +5,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.example.bruce.opengldemo1.domain.Triangle;
 
@@ -16,6 +17,7 @@ import javax.microedition.khronos.opengles.GL10;
  */
 
 public class TriangleGLSurfaceView extends GLSurfaceView {
+    private static final String TAG = "TriangleGLSurfaceView";
     private final SceneRender mRender;
     final float ANGLE_SPAN = 0.375f;
 
@@ -56,6 +58,7 @@ public class TriangleGLSurfaceView extends GLSurfaceView {
 
         @Override
         public void onDrawFrame(GL10 gl) {
+            Log.d(TAG,"onDrawFrame");
             GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
             triangle.drawSelf();
         }

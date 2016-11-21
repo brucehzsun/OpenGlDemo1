@@ -43,11 +43,18 @@ public class Triangle {
 
         float[] finalMatrix = getFinalMatrix(mMMatrix);
         GLES20.glUniformMatrix4fv(muMVPMatrixHandle, 1, false, finalMatrix, 0);
-        GLES20.glVertexAttribPointer(maPositionHandle, 3, GLES20.GL_FLOAT, false, 3 * 4, mVertexBuffer);
-        GLES20.glVertexAttribPointer(maColorHandle, 4, GLES20.GL_FLOAT, false, 4 * 4, mColorBuffer);
 
+        //将顶点位置数据传送进渲染管线；
+        GLES20.glVertexAttribPointer(maPositionHandle,//定点位置属性引用
+                3,//x,y,z 共三个。vec3；
+                GLES20.GL_FLOAT, false,
+                3 * 4,//每组数据的尺寸；三个点，每个点四个字节；
+                mVertexBuffer);
         GLES20.glEnableVertexAttribArray(maPositionHandle);
+
+        GLES20.glVertexAttribPointer(maColorHandle, 4, GLES20.GL_FLOAT, false, 4 * 4, mColorBuffer);
         GLES20.glEnableVertexAttribArray(maColorHandle);
+
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vCount);
     }
 
@@ -78,7 +85,9 @@ public class Triangle {
         vCount = 3;//三个顶点；
         final float UNIT_SIZE = 0.2f;//设置单位长度；
         float[] vertices = new float[]{//顶点坐标数据
-                -4 * UNIT_SIZE, 0, 0, 0, -4 * UNIT_SIZE, 0, 4 * UNIT_SIZE, 0, 0
+                -4 * UNIT_SIZE, 0, 0,//第一个顶点的xyz
+                0, -4 * UNIT_SIZE, 0,//第二个定点的xyz
+                4 * UNIT_SIZE, 0, 0//第三个定点的xyz；
         };
 
         ByteBuffer vertexBuffer = ByteBuffer.allocateDirect(vertices.length * 4);
@@ -88,7 +97,9 @@ public class Triangle {
         mVertexBuffer.position(0);//设置缓冲区起始位置；
 
         float[] colors = new float[]{
-                1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0
+                1, 0, 0, 0,//r
+                0, 0, 1, 0,//g
+                0, 1, 0, 0//b
         };
         ByteBuffer vertextColorBuffer = ByteBuffer.allocateDirect(colors.length * 4);
         vertextColorBuffer.order(ByteOrder.nativeOrder());
