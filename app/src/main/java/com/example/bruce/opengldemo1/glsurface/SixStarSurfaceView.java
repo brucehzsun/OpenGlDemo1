@@ -51,13 +51,13 @@ public class SixStarSurfaceView extends GLSurfaceView {
 
     private class SceneRenderer implements GLSurfaceView.Renderer {
 
-        SixPointedStar[] startList = new SixPointedStar[3];
+        SixPointedStar[] startList = new SixPointedStar[30];
 
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
             GLES20.glClearColor(0.5f, 0.5f, 0.5f, 1f);//设置屏幕背景色；
             for (int i = 0; i < startList.length; i++) {
-                startList[i] = new SixPointedStar(0.2f, 0.5f, - 0.3f * i);
+                startList[i] = new SixPointedStar(0.2f, 0.5f, -1f * i);
             }
             GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         }
@@ -66,8 +66,10 @@ public class SixStarSurfaceView extends GLSurfaceView {
         public void onSurfaceChanged(GL10 gl, int width, int height) {
             GLES20.glViewport(0, 0, width, height);
             float ratio = (float) width / height;
-            //设置正交投影
-            MatrixState.setPojectOrtho(-ratio, ratio, -1, 1, 1, 10);
+            //设置正交投影:近平面的宽高比 与 视窗的宽高比相等;
+//            MatrixState.setPojectOrtho(-ratio, ratio, -1, 2, 1, 10);
+
+            MatrixState.setProjectFrustum(-ratio*0.4f, ratio*0.4f, -1*0.4f, 1*0.4f, 1, 50);
             //设置摄像机
             MatrixState.setCamera(0, 0, 3f, 0, 0, 0f, 0f, 1.0f, 0.0f);
 

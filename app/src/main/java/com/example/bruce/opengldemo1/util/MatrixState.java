@@ -55,4 +55,8 @@ public class MatrixState {
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectMatrix, 0, mMVPMatrix, 0);
         return mMVPMatrix;
     }
+
+    public static void setProjectFrustum(float left, float right, float bottom, float top, float near, float far) {
+        Matrix.frustumM(mProjectMatrix, 0, left, right, bottom, top, near, far);
+    }
 }
