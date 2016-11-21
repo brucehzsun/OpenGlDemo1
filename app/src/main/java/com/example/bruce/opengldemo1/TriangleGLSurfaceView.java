@@ -50,10 +50,14 @@ public class TriangleGLSurfaceView extends GLSurfaceView {
 
         @Override
         public void onSurfaceChanged(GL10 gl, int width, int height) {
-            GLES20.glViewport(0, 0, width, height);
+            GLES20.glViewport(0, 0, width, height);//设置视口
             float ratio = (float) width / height;
             Matrix.frustumM(Triangle.mProjMatrix, 0, -ratio, ratio, -1, 1, 1, 10);
-            Matrix.setLookAtM(Triangle.mVMatrix, 0, 0, 0, 3, 0f, 0f, 0f, 0f, 1f, 0f);
+            Matrix.setLookAtM(Triangle.mVMatrix,//
+                    0,//offset
+                    0, 0, 3,//location xyz;
+                    0f, 0f, 0f,//观察xyz；
+                    0f, 1f, 0f);//up xyz；
         }
 
         @Override

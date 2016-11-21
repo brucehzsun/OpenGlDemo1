@@ -1,17 +1,18 @@
 package com.example.bruce.opengldemo1;
 
+import android.opengl.GLSurfaceView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TriangleGLSurfaceView glSurfaceView;
+    private GLSurfaceView glSurfaceView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
-        glSurfaceView = new TriangleGLSurfaceView(this);
+        glSurfaceView = new SixStarSurfaceView(this);
         glSurfaceView.requestFocus();
         glSurfaceView.setFocusable(true);
         setContentView(glSurfaceView);
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        glSurfaceView.release();
+//        glSurfaceView.release();
     }
 
     @Override
