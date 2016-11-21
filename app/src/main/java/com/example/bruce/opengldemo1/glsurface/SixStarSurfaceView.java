@@ -51,7 +51,7 @@ public class SixStarSurfaceView extends GLSurfaceView {
 
     private class SceneRenderer implements GLSurfaceView.Renderer {
 
-        SixPointedStar[] startList = new SixPointedStar[6];
+        SixPointedStar[] startList = new SixPointedStar[3];
 
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {

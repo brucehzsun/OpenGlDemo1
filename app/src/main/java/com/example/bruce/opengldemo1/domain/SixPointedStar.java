@@ -2,6 +2,7 @@ package com.example.bruce.opengldemo1.domain;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;
+import android.util.Log;
 
 import com.example.bruce.opengldemo1.util.MatrixState;
 import com.example.bruce.opengldemo1.util.ShaderUtil;
@@ -17,6 +18,9 @@ import java.util.List;
  */
 
 public class SixPointedStar {
+
+    private static final String TAG = "SixPointedStar";
+
     static float[] mMMatrix = new float[16];    //具体物体的3D变换矩阵，包括旋转、平移、缩放
     public float yAngle;
     public float xAngle;
@@ -64,7 +68,7 @@ public class SixPointedStar {
      */
     private void initVertexData(float R, float r, float z) {
         List<Float> flist = new ArrayList<Float>();
-        float tempAngle = 360 / 6;
+        float tempAngle = 360 / 5;
         //循环生成构成六角形的定点坐标；
         for (float angle = 0; angle < 360; angle += tempAngle) {
             //第一个点的xyz；
@@ -73,13 +77,20 @@ public class SixPointedStar {
             flist.add(z);
 
             //第二个点的坐标；
-            flist.add((float) (R * UNIT_SIZE * Math.cos(Math.toRadians(angle))));//x
-            flist.add((float) (R * UNIT_SIZE * Math.sin(Math.toRadians(angle))));//y
+            float secX = (float) (R * UNIT_SIZE * Math.cos(Math.toRadians(angle)));
+            float secY = (float) (R * UNIT_SIZE * Math.sin(Math.toRadians(angle)));
+            Log.d(TAG, "initVertexData angle = " + angle + ",secX = " + secX + ",secY = " + secY + ",z = " + z);
+            flist.add(secX);//x
+            flist.add(secY);//y
             flist.add(z);
 
             //第三个点的坐标；
-            flist.add((float) (r * UNIT_SIZE * Math.cos(Math.toRadians(angle + tempAngle / 2))));//x
-            flist.add((float) (r * UNIT_SIZE * Math.sin(Math.toRadians(angle + tempAngle / 2))));//y
+            float thirdAngle = (angle + tempAngle / 2);
+            float thirdX = (float) (r * UNIT_SIZE * Math.cos(Math.toRadians(thirdAngle)));
+            float thirdY = (float) (r * UNIT_SIZE * Math.sin(Math.toRadians(thirdAngle)));
+            Log.d(TAG, "initVertexData thirdAngle = " + thirdAngle + ",thirdX = " + thirdX + ",thirdY = " + thirdY + ",z = " + z);
+            flist.add(thirdX);//x
+            flist.add(thirdY);//y
             flist.add(z);
 
             //第一个中心点的xyz坐标；
@@ -113,17 +124,23 @@ public class SixPointedStar {
         mVertexBuffer.put(vertexArray);
         mVertexBuffer.position(0);
 
+        Log.d(TAG, "vCount = " + vCount);
         float[] colorArray = new float[vCount * 4];
         for (int i = 0; i < vCount; i++) {
-            if (i % 3 == 0) {//中心点为白色；
-                colorArray[i * 4] = 1;
-                colorArray[i * 4 + 1] = 1;
+            if (i == 0 || i == 1 || i == 2) {//中心点为白色；
+                colorArray[i * 4] = 0;
+                colorArray[i * 4 + 1] = 0;
                 colorArray[i * 4 + 2] = 1;
                 colorArray[i * 4 + 3] = 0;
-            } else {//淡蓝色 0.45 0.75 0.75 0
-                colorArray[i * 4] = 0.45f;
-                colorArray[i * 4 + 1] = 0.75f;
-                colorArray[i * 4 + 2] = 0.75f;
+            } else if (i == 3 || i == 4 || i == 5) {
+                colorArray[i * 4] = 1;
+                colorArray[i * 4 + 1] = 0;
+                colorArray[i * 4 + 2] = 0;
+                colorArray[i * 4 + 3] = 0;
+            } else {
+                colorArray[i * 4] = (float) (0);
+                colorArray[i * 4 + 1] = (float) (1);
+                colorArray[i * 4 + 2] = (float) (0);
                 colorArray[i * 4 + 3] = 0;
             }
         }
