@@ -44,9 +44,9 @@ public class CubeSurfaceView extends GLSurfaceView {
             //计算GLSurfaceView的宽高比
             Constant.ratio = (float) width / height;
             // 调用此方法计算产生透视投影矩阵
-            MatrixState.setProjectFrustum(-Constant.ratio, Constant.ratio , -1, 1, 20, 100);
+            MatrixState.setProjectFrustum(-Constant.ratio, Constant.ratio, -1, 1, 20, 100);
             // 调用此方法产生摄像机9参数位置矩阵
-            MatrixState.setCamera(-16f, 8f, 45, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+            MatrixState.setCamera(-16f, 8f, 65, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
 
             //初始化变换矩阵
             MatrixState.setInitStack();
@@ -65,6 +65,7 @@ public class CubeSurfaceView extends GLSurfaceView {
             //绘制变换后的立方体
             MatrixState.pushMatrix();
             MatrixState.translate(4, 0, 0);//沿x方向平移3
+            MatrixState.rotate(30, 1, 1, 1);
             cube.drawSelf();
             MatrixState.popMatrix();
         }

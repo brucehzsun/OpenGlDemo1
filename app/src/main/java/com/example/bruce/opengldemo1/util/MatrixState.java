@@ -22,6 +22,7 @@ public class MatrixState {
     static float[][] mStack = new float[10][16];
     static int stackTop = -1;
 
+
     /**
      * 获取不变换初始矩阵
      */
@@ -61,6 +62,9 @@ public class MatrixState {
         Matrix.translateM(currMatrix, 0, x, y, z);
     }
 
+    public static void rotate(float angle, float x, float y, float z) {
+        Matrix.rotateM(currMatrix, 0, angle, x, y, z);
+    }
 
     /**
      * @param cx  摄像机位置x
