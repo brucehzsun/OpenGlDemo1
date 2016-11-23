@@ -1,10 +1,10 @@
 package com.example.bruce.opengldemo1;
 
 import android.opengl.GLSurfaceView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.example.bruce.opengldemo1.glsurface.SixStarSurfaceView;
+import com.example.bruce.opengldemo1.glsurface.CubeSurfaceView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
-        glSurfaceView = new SixStarSurfaceView(this);
+        glSurfaceView = new CubeSurfaceView(this);
         glSurfaceView.requestFocus();
         glSurfaceView.setFocusable(true);
         setContentView(glSurfaceView);
