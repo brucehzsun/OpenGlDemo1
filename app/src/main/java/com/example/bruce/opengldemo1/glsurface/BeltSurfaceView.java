@@ -5,6 +5,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
 import com.example.bruce.opengldemo1.domain.Belt;
+import com.example.bruce.opengldemo1.domain.Circle;
 import com.example.bruce.opengldemo1.domain.Cube;
 import com.example.bruce.opengldemo1.util.Constant;
 import com.example.bruce.opengldemo1.util.MatrixState;
@@ -24,14 +25,16 @@ public class BeltSurfaceView extends GLSurfaceView {
     }
 
     private class SceneRenderer implements Renderer {
-        Belt belt;//立方体
+//        Belt belt;//立方体
+        private Circle circle;
 
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
             //设置屏幕背景色RGBA
             GLES20.glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
             //创建立方体对象
-            belt = new Belt();
+//            belt = new Belt();
+            circle = new Circle();
             //打开深度检测
             GLES20.glEnable(GLES20.GL_DEPTH_TEST);
             //打开背面剪裁
@@ -60,7 +63,8 @@ public class BeltSurfaceView extends GLSurfaceView {
 
             //绘制原立方体
             MatrixState.pushMatrix();
-            belt.drawSelf();
+//            belt.drawSelf();
+            circle.drawSelf();
             MatrixState.popMatrix();
 
 //            //绘制变换后的立方体
