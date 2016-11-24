@@ -67,6 +67,17 @@ public class MatrixState {
     }
 
     /**
+     * 按照 x y z轴进行缩放
+     *
+     * @param x x轴
+     * @param y y轴
+     * @param z z轴
+     */
+    public static void scale(float x, float y, float z) {
+        Matrix.scaleM(currMatrix, 0, x, y, z);
+    }
+
+    /**
      * @param cx  摄像机位置x
      * @param cy  摄像机位置y
      * @param cz  摄像机位置z

@@ -66,6 +66,7 @@ public class CubeSurfaceView extends GLSurfaceView {
             MatrixState.pushMatrix();
             MatrixState.translate(4, 0, 0);//沿x方向平移3
             MatrixState.rotate(30, 1, 1, 1);
+            MatrixState.scale(0.4f, 2f, 0.6f);
             cube.drawSelf();
             MatrixState.popMatrix();
         }
