@@ -4,6 +4,7 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.bruce.opengldemo1.glsurface.BeltSurfaceView;
 import com.example.bruce.opengldemo1.glsurface.CubeSurfaceView;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
-        glSurfaceView = new CubeSurfaceView(this);
+        glSurfaceView = new BeltSurfaceView(this);
         glSurfaceView.requestFocus();
         glSurfaceView.setFocusable(true);
         setContentView(glSurfaceView);
