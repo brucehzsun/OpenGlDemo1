@@ -86,7 +86,7 @@ public class BallSurface extends GLSurfaceView {
             //打开深度检测
             GLES20.glEnable(GLES20.GL_DEPTH_TEST);
             //打开背面剪裁
-            GLES20.glEnable(GLES20.GL_CULL_FACE);
+//            GLES20.glEnable(GLES20.GL_CULL_FACE);
         }
     }
 }

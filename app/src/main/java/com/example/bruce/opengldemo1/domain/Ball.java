@@ -39,8 +39,8 @@ public class Ball {
     public void initVertexData() {
         ArrayList<Float> vertixList = new ArrayList<>();
         final int angleSpan = 10;
-        for (int vAngle = -90; vAngle < 90; vAngle = vAngle + angleSpan)
-            for (int hAngle = 0; hAngle <= 360; hAngle = hAngle + angleSpan) {
+        for (int vAngle = 0; vAngle < 80; vAngle = vAngle + angleSpan)
+            for (int hAngle = 0; hAngle < 270; hAngle = hAngle + angleSpan) {
                 float x0 = (float) (r * Constant.UNIT_SIZE * Math.cos(Math.toRadians(vAngle)) * Constant.UNIT_SIZE * Math.cos(Math.toRadians(hAngle)));
                 float y0 = (float) (r * Constant.UNIT_SIZE * Math.cos(Math.toRadians(vAngle)) * Constant.UNIT_SIZE * Math.sin(Math.toRadians(hAngle)));
                 float z0 = (float) (r * Constant.UNIT_SIZE * Math.sin(Math.toRadians(vAngle)));
