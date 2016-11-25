@@ -3,22 +3,44 @@ package com.example.bruce.opengldemo1;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.RelativeLayout;
 
-import com.example.bruce.opengldemo1.glsurface.BeltSurfaceView;
-import com.example.bruce.opengldemo1.glsurface.CubeSurfaceView;
+import com.example.bruce.opengldemo1.glsurface.Cube2SurfaceView;
+import com.example.bruce.opengldemo1.util.Constant;
+import com.example.bruce.opengldemo1.util.MatrixState;
 
 public class MainActivity extends AppCompatActivity {
 
     private GLSurfaceView glSurfaceView;
 
+    private boolean isClick;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-        glSurfaceView = new BeltSurfaceView(this);
+        setContentView(R.layout.activity_main);
+        RelativeLayout rootLayout = (RelativeLayout) findViewById(R.id.activity_main);
+
+        glSurfaceView = new Cube2SurfaceView(this);
         glSurfaceView.requestFocus();
         glSurfaceView.setFocusable(true);
-        setContentView(glSurfaceView);
+        rootLayout.addView(glSurfaceView);
+
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isClick) {
+                    isClick = false;
+                    MatrixState.setProjectFrustum(-Constant.ratio, Constant.ratio, -1, 1, 20, 100);
+                    MatrixState.setCamera(0, 8f, 45, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+                } else {
+                    isClick = true;
+                    MatrixState.setProjectFrustum(-Constant.ratio * 0.7f, Constant.ratio * 0.7f, -0.7f, 0.7f, 1, 10);
+                    MatrixState.setCamera(0, 0.5f, 4, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+                }
+            }
+        });
     }
 
     @Override
