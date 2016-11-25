@@ -23,6 +23,8 @@ public class Circle {
     private int maPositionHandle;
     private int maColorHandle;
     private int muMVPMatrixHandle;
+    private int iCount;
+    private ByteBuffer mIndexBuffer;
 
     public Circle() {
         //初始化顶点坐标与着色数据
@@ -56,7 +58,7 @@ public class Circle {
     }
 
     private void initVertexData() {
-        int n = 40;
+        int n = 10;
         vCount = n + 2;
         float angdegSpan = 360.0f / n;
         float[] vertices = new float[vCount * 3];
@@ -77,6 +79,15 @@ public class Circle {
         mVertexBuffer = vbb.asFloatBuffer();
         mVertexBuffer.put(vertices);
         mVertexBuffer.position(0);
+
+        iCount = vCount;
+        byte[] indexs = new byte[iCount];
+        for (int i = 0; i < iCount; i++) {
+            indexs[i] = (byte) i;
+        }
+        mIndexBuffer = ByteBuffer.allocateDirect(indexs.length);
+        mIndexBuffer.put(indexs);
+        mIndexBuffer.position(0);
 
         count = 0;
         float[] colors = new float[vCount * 4];
@@ -129,6 +140,7 @@ public class Circle {
         GLES20.glEnableVertexAttribArray(maPositionHandle);
         GLES20.glEnableVertexAttribArray(maColorHandle);
         //绘制立方体
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, vCount);
+//        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, vCount);
+        GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, iCount, GLES20.GL_UNSIGNED_BYTE, mIndexBuffer);
     }
 }
