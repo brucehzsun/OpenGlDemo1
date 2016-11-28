@@ -1,4 +1,4 @@
-package com.example.bruce.opengldemo1.glsurface;
+package com.example.bruce.opengl.glsurface;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -9,9 +9,9 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.example.bruce.opengldemo1.domain.Ball;
-import com.example.bruce.opengldemo1.util.Constant;
-import com.example.bruce.opengldemo1.util.MatrixState;
+import com.example.bruce.opengl.domain.Ball;
+import com.example.bruce.opengl.util.Constant;
+import com.example.bruce.opengl.util.MatrixState;
 
 public class BallSurface extends GLSurfaceView {
     private final float TOUCH_SCALE_FACTOR = 180.0f / 320;//角度缩放比例
@@ -60,8 +60,8 @@ public class BallSurface extends GLSurfaceView {
         public void onDrawFrame(GL10 gl) {
             //清除深度缓冲与颜色缓冲
             GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
-            //初始化光源位置
-            MatrixState.setLightLocation(lightOffset, 0, 1.5f);
+            //初始化光源方向
+            MatrixState.setLightDirection(lightOffset, 0, 1.5f);
             //保护现场
             MatrixState.pushMatrix();
             //绘制球

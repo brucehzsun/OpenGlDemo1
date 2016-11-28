@@ -1,4 +1,4 @@
-package com.example.bruce.opengldemo1.util;
+package com.example.bruce.opengl.util;
 
 /**
  * Update by sunhongzhi on 2016/11/23.

@@ -1,8 +1,8 @@
-package com.example.bruce.opengldemo1.domain;
+package com.example.bruce.opengl.domain;
 
-import com.example.bruce.opengldemo1.util.MatrixState;
+import com.example.bruce.opengl.util.MatrixState;
 
-import static com.example.bruce.opengldemo1.util.Constant.UNIT_SIZE;
+import static com.example.bruce.opengl.util.Constant.UNIT_SIZE;
 
 //立方体
 public class Cube2 {

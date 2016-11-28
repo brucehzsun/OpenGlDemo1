@@ -1,16 +1,15 @@
-package com.example.bruce.opengldemo1.domain;
+package com.example.bruce.opengl.domain;
 
 import android.opengl.GLES20;
 
-import com.example.bruce.opengldemo1.util.Constant;
-import com.example.bruce.opengldemo1.util.MatrixState;
-import com.example.bruce.opengldemo1.util.ShaderUtil;
+import com.example.bruce.opengl.util.MatrixState;
+import com.example.bruce.opengl.util.ShaderUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import static com.example.bruce.opengldemo1.util.Constant.UNIT_SIZE;
+import static com.example.bruce.opengl.util.Constant.UNIT_SIZE;
 
 //颜色矩形
 public class ColorRect {

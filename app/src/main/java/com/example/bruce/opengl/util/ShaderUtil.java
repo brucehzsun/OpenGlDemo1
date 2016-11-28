@@ -1,4 +1,4 @@
-package com.example.bruce.opengldemo1.util;
+package com.example.bruce.opengl.util;
 
 import android.content.res.Resources;
 import android.opengl.GLES20;

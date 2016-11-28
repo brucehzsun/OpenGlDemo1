@@ -1,13 +1,12 @@
-package com.example.bruce.opengldemo1.glsurface;
+package com.example.bruce.opengl.glsurface;
 
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.opengl.Matrix;
 import android.view.MotionEvent;
 
-import com.example.bruce.opengldemo1.domain.SixPointedStar;
-import com.example.bruce.opengldemo1.util.MatrixState;
+import com.example.bruce.opengl.domain.SixPointedStar;
+import com.example.bruce.opengl.util.MatrixState;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;

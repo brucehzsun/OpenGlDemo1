@@ -1,4 +1,4 @@
-package com.example.bruce.opengldemo1.glsurface;
+package com.example.bruce.opengl.glsurface;
 
 import android.content.Context;
 import android.opengl.GLES20;
@@ -6,7 +6,7 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.Log;
 
-import com.example.bruce.opengldemo1.domain.Triangle;
+import com.example.bruce.opengl.domain.Triangle;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;

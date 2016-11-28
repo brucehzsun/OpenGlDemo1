@@ -1,10 +1,11 @@
-package com.example.bruce.opengldemo1.domain;
+package com.example.bruce.opengl.domain;
 
 import android.opengl.GLES20;
+import android.util.Log;
 
-import com.example.bruce.opengldemo1.util.Constant;
-import com.example.bruce.opengldemo1.util.MatrixState;
-import com.example.bruce.opengldemo1.util.ShaderUtil;
+import com.example.bruce.opengl.util.Constant;
+import com.example.bruce.opengl.util.MatrixState;
+import com.example.bruce.opengl.util.ShaderUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -14,8 +15,8 @@ import java.nio.FloatBuffer;
  * Update by sunhongzhi on 2016/11/24.
  */
 
-public class Circle {
-
+public class Belt {
+    private static final String TAG = "Belt";
     private int vCount;
     private FloatBuffer mVertexBuffer;
     private FloatBuffer mColorBuffer;
@@ -23,10 +24,8 @@ public class Circle {
     private int maPositionHandle;
     private int maColorHandle;
     private int muMVPMatrixHandle;
-    private int iCount;
-    private ByteBuffer mIndexBuffer;
 
-    public Circle() {
+    public Belt() {
         //初始化顶点坐标与着色数据
         initVertexData();
         //初始化shader
@@ -58,55 +57,73 @@ public class Circle {
     }
 
     private void initVertexData() {
-        int n = 10;
-        vCount = n + 2;
-        float angdegSpan = 360.0f / n;
-        float[] vertices = new float[vCount * 3];
+        int n = 60;
+        vCount = 2 * (n + 1);//顶点个数；
 
+        float angdegBegin = -90;
+        float angdegEnd = 90;
+        float angdegSpan = (angdegEnd - angdegBegin) / n;
+        float[] vertices = new float[vCount * 3];//定点坐标数组；
         int count = 0;
-        vertices[count++] = 0;
-        vertices[count++] = 0;
-        vertices[count++] = 0;
-        for (float angdeg = 0; Math.ceil(angdeg) <= 360; angdeg += angdegSpan) {
-            double angrad = Math.toRadians(angdeg);
-            vertices[count++] = (float) (-Constant.UNIT_SIZE * Math.sin(angrad));
-            vertices[count++] = (float) (Constant.UNIT_SIZE * Math.cos(angrad));
+        for (float angdeg = angdegBegin; angdeg <= angdegEnd; angdeg += angdegSpan) {
+            Log.d(TAG,"for angdeg = "+angdeg);
+            double angrad = Math.toRadians(angdeg);//当前弧度；
+            vertices[count++] = (float) (-0.6f * Constant.UNIT_SIZE * Math.sin(angrad));//定点x坐标；
+            vertices[count++] = (float) (0.6f * Constant.UNIT_SIZE * Math.cos(angrad));//顶点y坐标;
+            vertices[count++] = 0;
+
+            vertices[count++] = (float) (-Constant.UNIT_SIZE * Math.sin(angrad));//x
+            vertices[count++] = (float) (Constant.UNIT_SIZE * Math.cos(angrad));//y
             vertices[count++] = 0;
         }
 
-        ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length * 4);
-        vbb.order(ByteOrder.nativeOrder());
-        mVertexBuffer = vbb.asFloatBuffer();
+        ByteBuffer vertexBuffer = ByteBuffer.allocateDirect(vertices.length * 4);
+        vertexBuffer.order(ByteOrder.nativeOrder());
+        mVertexBuffer = vertexBuffer.asFloatBuffer();
         mVertexBuffer.put(vertices);
         mVertexBuffer.position(0);
 
-        iCount = vCount;
-        byte[] indexs = new byte[iCount];
-        for (int i = 0; i < iCount; i++) {
-            indexs[i] = (byte) i;
-        }
-        mIndexBuffer = ByteBuffer.allocateDirect(indexs.length);
-        mIndexBuffer.put(indexs);
-        mIndexBuffer.position(0);
-
         count = 0;
         float[] colors = new float[vCount * 4];
-        colors[count++] = 0;
-        colors[count++] = 1;
-        colors[count++] = 0;
-        colors[count++] = 0;
+        for (int i = 0; i < colors.length; i += 8) {
+            if(i == 0){
+                colors[count++] = 0;//r
+                colors[count++] = 0;//g
+                colors[count++] = 1;//b
+                colors[count++] = 0;//a
 
-        for (int i = 4; i < colors.length; i += 4) {
+                colors[count++] = 0;//r
+                colors[count++] = 0;//g
+                colors[count++] = 1;//b
+                colors[count++] = 0;//a
 
-            colors[count++] = 0;
-            colors[count++] = 0;
-            colors[count++] = 1;
-            colors[count++] = 0;
+            }else if(i==8){
+                colors[count++] = 0;//r
+                colors[count++] = 0;//g
+                colors[count++] = 1;//b
+                colors[count++] = 0;//a
+
+                colors[count++] = 1;//r
+                colors[count++] = 0;//g
+                colors[count++] = 0;//b
+                colors[count++] = 0;//a
+            } else {
+
+                colors[count++] = 0;//r
+                colors[count++] = 1;//g
+                colors[count++] = 0;//b
+                colors[count++] = 0;//a
+
+                colors[count++] = 1;//r
+                colors[count++] = 0;//g
+                colors[count++] = 0;//b
+                colors[count++] = 0;//a
+            }
+
         }
-
-        ByteBuffer cbb = ByteBuffer.allocateDirect(colors.length * 4);
-        cbb.order(ByteOrder.nativeOrder());
-        mColorBuffer = cbb.asFloatBuffer();
+        ByteBuffer colorBuffer = ByteBuffer.allocateDirect(colors.length * 4);
+        colorBuffer.order(ByteOrder.nativeOrder());
+        mColorBuffer = colorBuffer.asFloatBuffer();
         mColorBuffer.put(colors);
         mColorBuffer.position(0);
     }
@@ -140,7 +157,6 @@ public class Circle {
         GLES20.glEnableVertexAttribArray(maPositionHandle);
         GLES20.glEnableVertexAttribArray(maColorHandle);
         //绘制立方体
-//        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, vCount);
-        GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, iCount, GLES20.GL_UNSIGNED_BYTE, mIndexBuffer);
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, vCount);
     }
 }

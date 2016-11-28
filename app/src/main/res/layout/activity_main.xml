@@ -4,9 +4,9 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.bruce.opengldemo1.MainActivity">
+    tools:context="com.example.bruce.opengl.MainActivity">
 
-    <com.example.bruce.opengldemo1.glsurface.BallSurface
+    <com.example.bruce.opengl.glsurface.BallSurface
         android:id="@+id/glSurfaceView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,13 +1,11 @@
-package com.example.bruce.opengldemo1;
+package com.example.bruce.opengl;
 
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 
-import com.example.bruce.opengldemo1.glsurface.BallSurface;
+import com.example.bruce.opengl.glsurface.BallSurface;
 
 public class MainActivity extends AppCompatActivity {
 

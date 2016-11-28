@@ -1,6 +1,8 @@
-package com.example.bruce.opengldemo1.domain;
+package com.example.bruce.opengl.domain;
 
 import java.nio.ByteBuffer;
+
+import static com.example.bruce.opengl.util.Constant.UNIT_SIZE;
 
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -9,20 +11,19 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.opengl.GLES20;
 
-import com.example.bruce.opengldemo1.util.MatrixState;
-import com.example.bruce.opengldemo1.util.ShaderUtil;
-
-import static com.example.bruce.opengldemo1.util.Constant.UNIT_SIZE;
+import com.example.bruce.opengl.util.MatrixState;
+import com.example.bruce.opengl.util.ShaderUtil;
 
 //球
 public class Ball {
     int mProgram;// 自定义渲染管线着色器程序id
     int muMVPMatrixHandle;// 总变换矩阵引用
     int muMMatrixHandle;//位置、旋转变换矩阵引用
-    int maPositionHandle; // 顶点位置属性引用
     int muRHandle;// 球的半径属性引用
+    int maPositionHandle; // 顶点位置属性引用
     int maNormalHandle; //顶点法向量属性引用
-    int maLightLocationHandle;//光源位置属性引用
+    int muLightDirectionHandle;//光源方向属性引用
+    int maCameraHandle; //摄像机位置属性引用
 
 
     String mVertexShader;// 顶点着色器
@@ -137,13 +138,13 @@ public class Ball {
     }
 
     // 初始化shader
-    public void initShader(Context context) {
+    public void initShader(Context mv) {
         // 加载顶点着色器的脚本内容
         mVertexShader = ShaderUtil.loadFromAssetsFile("vertex.sh",
-                context.getResources());
+                mv.getResources());
         // 加载片元着色器的脚本内容
         mFragmentShader = ShaderUtil.loadFromAssetsFile("frag.sh",
-                context.getResources());
+                mv.getResources());
         // 基于顶点着色器与片元着色器创建程序
         mProgram = ShaderUtil.createProgram(mVertexShader, mFragmentShader);
         // 获取程序中顶点位置属性引用
@@ -156,8 +157,10 @@ public class Ball {
         muRHandle = GLES20.glGetUniformLocation(mProgram, "uR");
         //获取程序中顶点法向量属性引用
         maNormalHandle = GLES20.glGetAttribLocation(mProgram, "aNormal");
-        //获取程序中光源位置引用
-        maLightLocationHandle = GLES20.glGetUniformLocation(mProgram, "uLightLocation");
+        //获取程序中光源方向引用
+        muLightDirectionHandle = GLES20.glGetUniformLocation(mProgram, "uLightDirection");
+        //获取程序中摄像机位置引用
+        maCameraHandle = GLES20.glGetUniformLocation(mProgram, "uCamera");
     }
 
     public void drawSelf() {
@@ -173,8 +176,10 @@ public class Ball {
         GLES20.glUniformMatrix4fv(muMMatrixHandle, 1, false, MatrixState.getMMatrix(), 0);
         // 将半径尺寸传入着色器程序
         GLES20.glUniform1f(muRHandle, r * UNIT_SIZE);
-        //将光源位置传入着色器程序
-        GLES20.glUniform3fv(maLightLocationHandle, 1, MatrixState.lightPositionFB);
+        //将光源方向传入着色器程序
+        GLES20.glUniform3fv(muLightDirectionHandle, 1, MatrixState.lightDirectionFB);
+        //将摄像机位置传入着色器程序
+        GLES20.glUniform3fv(maCameraHandle, 1, MatrixState.cameraFB);
 
         // 将顶点位置数据传入渲染管线
         GLES20.glVertexAttribPointer(maPositionHandle, 3, GLES20.GL_FLOAT,

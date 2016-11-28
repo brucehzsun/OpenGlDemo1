@@ -1,17 +1,17 @@
-package com.example.bruce.opengldemo1.glsurface;
+package com.example.bruce.opengl.glsurface;
 
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 
-import com.example.bruce.opengldemo1.domain.Cube2;
-import com.example.bruce.opengldemo1.util.MatrixState;
+import com.example.bruce.opengl.domain.Cube2;
+import com.example.bruce.opengl.util.MatrixState;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import static com.example.bruce.opengldemo1.util.Constant.ratio;
+import static com.example.bruce.opengl.util.Constant.ratio;
 
 public class Cube2SurfaceView extends GLSurfaceView {
     private final float TOUCH_SCALE_FACTOR = 180.0f / 320;//角度缩放比例
