@@ -3,6 +3,8 @@ package com.example.bruce.opengldemo1.util;
 import android.opengl.Matrix;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 
 /**
  * Update by sunhongzhi on 2016/11/21.
@@ -21,6 +23,8 @@ public class MatrixState {
     //保护变换矩阵的栈
     static float[][] mStack = new float[10][16];
     static int stackTop = -1;
+    public static float[] lightLocation=new float[]{0,0,0};//定位光光源位置
+    public static FloatBuffer lightPositionFB;
 
 
     /**
@@ -130,5 +134,21 @@ public class MatrixState {
     //获取具体物体的变换矩阵
     public static float[] getMMatrix() {
         return currMatrix;
+    }
+
+    //设置灯光位置的方法
+    static ByteBuffer llbbL = ByteBuffer.allocateDirect(3*4);
+    public static void setLightLocation(float x,float y,float z)
+    {
+        llbbL.clear();
+
+        lightLocation[0]=x;
+        lightLocation[1]=y;
+        lightLocation[2]=z;
+
+        llbbL.order(ByteOrder.nativeOrder());//设置字节顺序
+        lightPositionFB=llbbL.asFloatBuffer();
+        lightPositionFB.put(lightLocation);
+        lightPositionFB.position(0);
     }
 }

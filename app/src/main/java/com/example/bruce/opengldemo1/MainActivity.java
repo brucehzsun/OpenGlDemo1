@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 
 import com.example.bruce.opengldemo1.glsurface.BallSurface;
 
@@ -18,12 +19,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RelativeLayout rootLayout = (RelativeLayout) findViewById(R.id.activity_main);
+        glSurfaceView = (GLSurfaceView) findViewById(R.id.glSurfaceView);
+        SeekBar sb = (SeekBar) this.findViewById(R.id.SeekBar01);
+        sb.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress,
+                                                  boolean fromUser) {
+                        ((BallSurface) glSurfaceView).setLightOffset((seekBar.getMax() / 2.0f - progress) / (seekBar.getMax() / 2.0f) * -4);
+                    }
 
-        glSurfaceView = new BallSurface(this);
-        glSurfaceView.requestFocus();
-        glSurfaceView.setFocusable(true);
-        rootLayout.addView(glSurfaceView);
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                }
+        );
 
 //        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 //            @Override
