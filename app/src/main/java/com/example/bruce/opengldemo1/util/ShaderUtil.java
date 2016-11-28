@@ -1,7 +1,11 @@
 package com.example.bruce.opengldemo1.util;
 
+import android.content.res.Resources;
 import android.opengl.GLES20;
 import android.util.Log;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * Update by sunhongzhi on 2016/11/18.
@@ -84,5 +88,26 @@ public class ShaderUtil {
             return 0;
         }
         return program;
+    }
+
+    //从sh脚本中加载shader内容的方法
+    public static String loadFromAssetsFile(String fname, Resources r) {
+        String result = null;
+        try {
+            InputStream in = r.getAssets().open(fname);
+            int ch = 0;
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            while ((ch = in.read()) != -1) {
+                baos.write(ch);
+            }
+            byte[] buff = baos.toByteArray();
+            baos.close();
+            in.close();
+            result = new String(buff, "UTF-8");
+            result = result.replaceAll("\\r\\n", "\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

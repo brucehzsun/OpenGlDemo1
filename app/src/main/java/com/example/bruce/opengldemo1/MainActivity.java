@@ -7,9 +7,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.example.bruce.opengldemo1.glsurface.BallSurface;
-import com.example.bruce.opengldemo1.glsurface.Cube2SurfaceView;
-import com.example.bruce.opengldemo1.util.Constant;
-import com.example.bruce.opengldemo1.util.MatrixState;
 
 public class MainActivity extends AppCompatActivity {
 
